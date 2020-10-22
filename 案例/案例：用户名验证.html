@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表单验证</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        .big {
+            width: 800px;
+            margin: 100px auto;
+        }
+        
+        span {
+            color: #333333;
+            font-size: 14px;
+        }
+        
+        .name {
+            display: inline-block;
+            width: 100px;
+            /* font-size: 12px; */
+            text-align: right;
+            margin-right: 20px;
+        }
+        
+        input {
+            outline: none;
+            border: 1px solid #333;
+            padding-left: 5px;
+        }
+        
+        input::input {
+            box-shadow: inset 1px 1px 5px rgba(0, 128, 0, .2);
+        }
+        
+        .safety {
+            height: 45px;
+            box-sizing: border-box;
+            padding-top: 15px;
+            margin-left: 190px;
+        }
+        
+        .safety span {
+            float: left;
+            color: #e8efff;
+        }
+        
+        li {
+            float: left;
+            width: 30px;
+            height: 20px;
+            color: #f1f3f4;
+            font-size: 12px;
+            text-align: center;
+            line-height: 20px;
+            background: #ff0000;
+        }
+        
+        li:nth-child(2) {
+            background-color: #008000;
+        }
+        
+        li:nth-child(3) {
+            background-color: #ffd000;
+        }
+        
+        .agreement {
+            margin: 30px 100px;
+        }
+        
+        .agreement input {
+            position: relative;
+            top: 2px;
+        }
+        
+        .agreement a {
+            text-decoration: none;
+            font-size: 12px;
+            color: #a6e4ff;
+        }
+        
+        .login {
+            width: 200px;
+            height: 30px;
+            font-size: 14px;
+            line-height: 30px;
+            text-align: center;
+            color: #ffffff;
+            margin-left: 96px;
+            background-color: red;
+            cursor: pointer;
+        }
+        
+        .verification {
+            visibility: hidden;
+        }
+        
+        .incorrect {
+            color: red;
+        }
+        
+        .correct {
+            color: green;
+        }
+    </style>
+    <script src="用户验证.js"></script>
+</head>
+
+<body>
+    <div class="big">
+        <p>
+            <span class="name">手机号</span>
+            <input type="text" class="phone">
+            <span class="verification"></span>
+        </p>
+        <p>
+            <span class="name">QQ</span>
+            <input type="text" class="qq">
+            <span class="verification"></span>
+        </p>
+        <p>
+            <span class="name">昵称</span>
+            <input type="text" class="nickname">
+            <span></span>
+        </p>
+        <p>
+            <span class="name">短信验证码</span>
+            <input type="text" class="veriCode">
+            <span class="verification"></span>
+        </p>
+        <p>
+            <span class="name">登录密码</span>
+            <input type="text" class="password">
+            <span class="verification"></span>
+        </p>
+        <div class="safety">
+            <span>安全级别</span>
+            <ul>
+                <li>弱</li>
+                <li>高</li>
+                <li>强</li>
+            </ul>
+        </div>
+        <p>
+            <span class="name">确认密码</span>
+            <input type="text" class="contrast">
+            <span class="verification"></span>
+        </p>
+        <div class="agreement">
+            <input type="checkbox">
+            <span>同意协商并注册</span>
+            <a href="javascitpt:;">《用户协议》</a>
+        </div>
+        <div class="login">免费注册</div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        
+        *::selection {
+            /* 这样可以解决双击文字的时候 会有默认选中文字 */
+            background-color: #fff;
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        input {
+            outline: none;
+            border: none;
+        }
+        
+        input::selection {
+            color: #fff;
+            background-color: #3390ff;
+        }
+        
+        .box {
+            width: 1000px;
+            height: 500px;
+            margin: 50px auto;
+            border: 1px solid #278fb4;
+        }
+        
+        .header {
+            position: relative;
+            height: 40px;
+        }
+        
+        .test {
+            display: flex;
+            height: 40px;
+            border-bottom: 1px solid #1d5570;
+        }
+        
+        .test li {
+            position: relative;
+            top: 1px;
+            font-size: 14px;
+            width: 100px;
+            line-height: 39px;
+            text-align: center;
+            border-right: 1px solid #1d5570;
+            overflow: hidden;
+        }
+        
+        .test i {
+            box-sizing: border-box;
+            position: absolute;
+            top: -10px;
+            right: -12px;
+            font-style: normal;
+            width: 25px;
+            height: 25px;
+            line-height: 32px;
+            text-align: left;
+            padding-left: 2px;
+            background-color: #eeddb1;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .test input {
+            border: 1px solid #ccc;
+            font-size: 12px;
+            width: 70%;
+        }
+        
+        .test .current {
+            /* li开启定位 往下移动1px 就压盖住了父元素的下边框 有now类的 加一个白色的背景即可 */
+            background-color: #fff;
+        }
+        
+        .add {
+            position: absolute;
+            top: -2px;
+            right: 15px;
+            font-size: 26px;
+            cursor: pointer;
+        }
+        
+        p {
+            display: none;
+            margin: 30px;
+        }
+        
+        p input {
+            margin: 30px;
+            width: 80%;
+            height: 100px;
+            border: 1px solid #1d5570;
+        }
+        
+        .current1 {
+            display: block;
+        }
+    </style>
+    <script src="tab.js"></script>
+</head>
+
+<body>
+    <div class="box">
+        <div class="header">
+            <ul class="test">
+                <li class="current">
+                    <span>测试1</span>
+                    <i>×</i>
+                </li>
+                <li>
+                    <span>测试2</span>
+                    <i>×</i>
+                </li>
+                <li>
+                    <span>测试3</span>
+                    <i>×</i>
+                </li>
+            </ul>
+            <butdivton class="add">+</butdivton>
+        </div>
+        <div class="bottom">
+            <p class="current1">测试1</p>
+            <p>测试2</p>
+            <p>测试3</p>
+        </div>
+    </div>
+</body>
+
+</html>

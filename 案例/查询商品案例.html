@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品查询</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        
+        .box {
+            width: 800px;
+            margin: 10px auto;
+        }
+        
+        .header input {
+            width: 100px;
+            outline: none;
+            padding-left: 5px;
+            border: 1px solid #ccc;
+        }
+        
+        table {
+            margin-top: 10px;
+            width: 800px;
+            border-collapse: collapse;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="header">
+            按照价格查询：<input type="text" class="first">-<input type="text" class="second"><button class="fiPrice">搜索</button> 按照商品名称查询： <input type="text" class="content"><button class="fiContent">搜索</button>
+        </div>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>产品名称</th>
+                    <th>价格</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+    <script>
+        //数据是以数组的形式存在的，数组里面存放着若干个对象，每个对象包含着商品信息
+        var lis = [{
+            id: 1,
+            pname: '小米',
+            price: 3999,
+        }, {
+            id: 2,
+            pname: 'oppo',
+            price: 999,
+        }, {
+            id: 3,
+            pname: '荣耀',
+            price: 1299,
+        }, {
+            id: 4,
+            pname: '华为',
+            price: 1999,
+        }, ];
+        // 1、 获取元素 一定要在调用渲染页面函数的上面 
+        var tbody = document.querySelector('tbody');
+        var firstPr = document.querySelector('.first');
+        var secondPr = document.querySelector('.second');
+        var fiPrice = document.querySelector('.fiPrice');
+        var content = document.querySelector('.content');
+        var fiContent = document.querySelector('.fiContent');
+        // 2、 调用渲染页面的函数 在页面一加载就会有数据
+        upDate(lis);
+        // 渲染页面的函数
+        function upDate(date) {
+            // 首先清空tbody 在进行筛选的时候 就只会渲染符合条件的
+            tbody.innerHTML = '';
+            date.forEach(function(value) {
+                var tr = document.createElement('tr');
+                tr.innerHTML = '<td>' + value.id + '</td>' + '<td>' + value.pname + '</td>' + '<td>' + value.price + '</td>';
+                tbody.appendChild(tr);
+            });
+        }
+        // 3、 价格的筛选
+        function price() {
+            if (firstPr.value == '' && secondPr.value == '') {
+                alert('请输入价格范围');
+                return false;
+            } else {
+                var newArr = lis.filter(item => firstPr.value <= item.price && secondPr.value >= item.price);
+                upDate(newArr);
+            }
+        }
+        // 在点击按钮 和按回车键都能进行价格的筛选
+        fiPrice.addEventListener('click', price);
+        firstPr.addEventListener('keyup', function(e) {
+            if (e.keyCode == 13) {
+                price();
+            }
+        });
+        secondPr.addEventListener('keyup', function(e) {
+            if (e.keyCode == 13) {
+                price();
+            }
+        });
+        // 4、 名称的筛选
+        function nameFi() {
+            var arr = [];
+            lis.some(function(value) {
+                if (value.pname == content.value) {
+                    arr.push(value);
+                    upDate(arr);
+                    // 在这里价格return true 会出错
+                } else if (content.value == '') {
+                    alert('请输入产品名称');
+                    // some方法中 只有返回return才会停止循环
+                    return true; //return 后面必须写true
+                }
+            })
+        }
+        // 在点击按钮 和按回车键都能进行名称的筛选
+        fiContent.addEventListener('click', nameFi)
+        content.addEventListener('keyup', function(e) {
+            if (e.keyCode == 13) {
+                nameFi();
+            }
+        })
+    </script>
+</body>
+
+</html>
