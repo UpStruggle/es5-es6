@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 函数的定义方式
+        // //1.自定义函数 （命名函数）
+        // function fn() {};
+        // //2.函数表达式 （匿名函数）
+        // var fun = function() {};
+        // //3.利用 new Function('参数1','参数2','函数体')
+        // var f = new Function('a', 'b', 'console.log(a+b)');
+        // f(1, 2);
+
+        //函数的调用方式
+        //1.普通函数
+        // function fn() {
+        //     console.log("函数");
+        // }
+        // fn();
+        // fn.call()
+        //     //2.对象的方法
+        // var o = {
+        //     SayHi: function() {
+        //         console.log("函数");
+        //     }
+        // }
+        // o.SayHi();
+        // //3.构造函数
+        // function Star() {};
+        // new Star();
+        // //4.绑定事件函数
+        // btn.onclick = function() {}; //点击按钮可以调用
+        // //5.定时器函数
+        // setInterval(function() {}, 1000); //定时器每隔一秒调用一次
+        // //6.立即执行函数  不需要调用，会自动执行
+        // (function() {
+        //     console.log("函数");
+        // })();
+
+        //改变函数内部this指向
+        //1.call()
+        // var o = {
+        //     name: 'andy'
+        // }
+
+        // function fn(a, b) {
+        //     console.log(this); //此时this指向window
+        //     console.log(a + b);
+        // }
+        // fn.call(o, 1, 2); //将this指向改为指向o
+        // function Father(uname,age,sex){
+        //     this.uname = uname;
+        //     this.age = age;
+        //     this.sex = sex;
+        // }
+        // function Son(uname,age,sex){
+        //     Father.call(this,uname,age,sex); //调用父构造函数的同时，把父构造函数的this改成指向子构造函数
+        // }
+
+        //2.apply()
+        // var o = {
+        //     name: 'andy'
+        // }
+
+        // function fn(arr) {
+        //     console.log(arr); //'pink'
+        // }
+        // fn.apply(o, ['pink']);
+        // //利用apply借助于数学内置对象求数组最大值
+        // var arr = [1, 66, 2, 99, 4];
+        // var max = Math.max.apply(Math, arr);
+        // console.log(max);
+
+        //bind（）方法
+        var o = {
+            name: 'andy'
+        }
+
+        function fn() {
+            console.log(this);
+        }
+        var f = fn.bind(o);
+        f(); //this指向o
+        //bind的应用 有一排按钮，点击之后就禁用这个按钮，3s之后再开启
+        var btns = document.querySelectorAll('button');
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].onclick = function() {
+                this.disabled = true;
+                setInterval(function() {
+                    //定时器里面的this指向的是window，因此不可以直接用 this.disabled = false;
+                    this.disabled = false;
+                }.bind(this), 3000)
+            }
+        }
+    </script>
+</body>
+
+</html>

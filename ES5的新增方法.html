@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //forEach迭代（遍历）数组
+        // var arr = [1, 2, 3];
+        // var sum = 0;
+        // arr.forEach(function(value, index, array) {
+        //     console.log("每个数组元素" + value);
+        //     console.log("每个数组元素的索引号" + index);
+        //     console.log("数组本身" + array);
+        //     sum += value; //求数组元素的和 
+        //     console.log(sum); //6
+        // })
+
+        //filter筛选数组
+        // var arr = [12, 22, 44, 68];
+        // var newArr = arr.filter(function(value, index, array) {
+        //     return value >= 20; //返回大于等于20的元素
+        // });
+        // console.log(newArr);
+
+        //some:用于查找数组中是否有满足条件的元素
+        var arr = [12, 22, 44, 68];
+        var flag = arr.some(function(value) {
+            return value >= 20; //返回大于等于20的元素
+        });
+        console.log(flag); //返回true
+    </script>
+</body>
+
+</html>

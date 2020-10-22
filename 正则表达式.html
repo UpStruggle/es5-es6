@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <textarea name="" id="message" cols="30" rows="10"></textarea><button>提交</button>
+    <div></div>
+    <script>
+        // //1.利用RegExp对象来创建正则表达式
+        // var regexp = new RegExp(/123/);
+        // //2.利用字面量创建正则表达式
+        // var rg = /123/;
+        // //测试正则表达式test
+        // console.log(rg.test(123));
+
+        // //边界符
+        // var reg1 = /^abc/;
+        // console.log(reg1.test('abcd')); //表示查询字符串里是否有以abc为开头的字符串
+        // var reg2 = /abc$/;
+        // console.log(reg2.test('abcd')); //表示查询字符串里是否有以abc为结尾的字符串
+        // var reg3 = /^abc$/;
+        // console.log(reg3.test('abcd')); //表示查询字符串里是否有abc字符串
+
+        // //字符类：
+        // //[ ]   有一系列字符可以选择，只要匹配其中一个就可以了
+        // var reg4 = /[abc]/; //只要包含 a 或者 b 或者包含 c 就都返回true
+        // var reg5 = /^[abc]$/; //（三选一）包含 a 或者 b 或者包含 c 才任意其中一个返回true
+        // //[ - ] : 范围符
+        // var reg6 = /^[a-z]$/; //26个字母任何一个返回的都是true
+        // //字符组合
+        // var reg7 = /^[a-zA-Z0-9_-]$/; //26个英文字母（大小写均可），数字，下划线，短横线均返回true
+        // console.log(reg4.test('rincg')); //true
+        // console.log(reg5.test('abc')); //false
+        // console.log(reg6.test("A")); //false
+
+        // //量词符
+        // var rg1 = /^a*$/; //a出现任何次数返回结果都是true
+        // console.log(rg1.test('')); //true
+        // var rg2 = /^a+$/; //a出现任何大于等于一次返回结果都是true
+        // console.log(rg1.test('a')); //true
+        // var rg3 = /^a?$/; //a出现一次或者一次都不出现返回结果就是true
+        // console.log(rg1.test('aaa')); //false
+        // var rg4 = /^a{3}$/; //a出现3次返回结果是true
+        // console.log(rg4.test('aaa')); //true
+        // var rg5 = /^a{3,}$/; //a出现大于等于3次，返回结果是true
+        // console.log(rg5.test('aa')); //false
+        // var rg6 = /^a{3,5}$/; //a出现大于等于3次小于等于5次，返回结果是true
+        // console.log(rg6.test('aaaa')); //true
+        // //综合
+        // //6到16位，26个英文字母（大小写均可），数字，下划线，短横线均返回true
+        // var rg7 = /^[a-zA-Z0-9_-]{6,16}$/; //量词中间不能有空格
+
+        //**括号总结**
+        // 1. 大括号 {  } 量词符，里面表示重复次数
+        var r1 = /^[abc]$/; //（三选一）包含 a 或者 b 或者包含 c 才任意其中一个返回true
+        // 2. 中括号 [  ]  字符集合，匹配方括号中的任意字符
+        var r2 = /^abc{3}$/; //让c重复三次
+        console.log(r2.test('abccc')); //true
+        console.log(r2.test('aaabbbccc')); //false
+        console.log(r2.test('abcabcabc')); //false
+        // 3. 小括号 (   )  表示优先级
+        var r3 = /^(abc){3}$/; //让abc重复三次
+        console.log(r3.test('aaacccbbb')); //false
+        console.log(r3.test('abcabcabc')); //true
+
+        //正则表达式的替换
+        var text = document.querySelector("textarea");
+        var btn = document.querySelector("button");
+        var div = document.querySelector("div");
+        btn.onclick = function() {
+            div.innerHTML = text.value.replace(/激情/g, '**'); //加上g，全局匹配
+        }
+    </script>
+</body>
+
+</html>

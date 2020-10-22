@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // //1.对象字面量 创建对象
+        // var obj1 = {};
+        // // 2.new Object() 创建对象
+        // var obj2 = new Object();
+        // // 3.自定义构造函数 创建对象
+        // function Star(uname, age) {
+        //     this.uname = uname;
+        //     this.age = age;
+        //     this.sing = function() {
+        //         console.log('我会唱歌');
+        //     }
+        // }
+        // var ldh = new Star('刘德华', 18);
+        // var zxy = new Star('张学友', 24);
+        // ldh.sing();
+        // zxy.sing();
+        // //静态成员 在构造函数本身上添加的成员
+        // Star.sex='男';//sex 就是静态成员
+        // //静态成员只能通过构造函数来访问，不能通过对象来访问
+        // console.log(Star.sex);//输出 男
+        // //console.log(ldh.sex);//这样是不对的
+
+        //构造函数原型：prototype
+        function Star(uname, age) {
+            this.uname = uname;
+            this.age = age;
+        }
+        Star.prototype.sing = function() {
+            console.log('我会唱歌');
+        }
+
+        // Star.prototype = {
+        // constroctor:Star,  //加上这句就会指回原来的构造函数了
+        //     sing: function() {
+        //         console.log('我会唱歌');
+        //     },
+        //     movie: function() {
+        //         console.log('我会演电影');
+        //     }
+        // }
+
+        var ldh = new Star('刘德华', 18);
+        var zxy = new Star('张学友', 24);
+        ldh.sing();
+        zxy.sing();
+        // console.log(Star.prototype);
+        // console.log(ldh.__proto__); //此时输出的就没有constructor了，因为被覆盖掉了
+        console.log(Star.prototype.constructor);
+        console.log(ldh.__proto__.constructor); //指向构造函数ƒ Star(uname, age) {...}
+    </script>
+</body>
+
+</html>

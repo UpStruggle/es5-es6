@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //数组解构
+        let arr1 = [1, 2, 3];
+        let [a, b, c, d, e] = arr1;
+        console.log(a); //1
+        console.log(b); //2
+        console.log(c); //3
+        //解构不成功
+        console.log(d); //undefined
+        console.log(e); //undefined
+
+        //对象解构
+        let person = {
+            name: 'xs',
+            age: '20'
+        };
+        // let {
+        //     name,
+        //     age
+        // } = person;
+        //另一种写法
+        let {
+            name: myName,
+            age: myAge
+        } = person;
+        console.log(myName); //xs
+        console.log(myAge); //20
+
+        //箭头函数
+        //箭头函数
+        const fn = () => {
+            console.log(123);
+        }
+        fn(); //123
+
+        const sum = (num1, num2) => {
+                return num1 + num2;
+            }
+            //等价于： const sum = (num1, num2) => num1 + num2;
+        const result = sum(2, 3); //5
+        console.log(result);
+
+        //箭头函数面试题
+        var obj = {
+            age: 20,
+            say: () => {
+                alert(this.age)
+            }
+        }
+        obj.say(); //undefined
+
+        //剩余参数
+        const sums = (...args) => {
+            let total = 0;
+            args.forEach(items => total += items);
+            return total;
+        }
+        console.log(sums(10, 20)); //30
+        console.log(sums(10, 20, 30)); //60
+
+        //剩余参数和解构配合使用
+        let students = ['张三', '李四', '王五'];
+        let [s1, ...s2] = students;
+        console.log(s1); //张三
+        console.log(s2); //['李四', '王五']
+
+        //扩展运算符
+        let ary1 = [1, 2, 3];
+        console.log(...ary1); // 1 2 3
+        let ary2 = [2, 3, 4];
+        //合并数组
+        console.log(...ary1, ...ary2); //1 2 3 2 3 4
+        //追加元素
+        ary1.push(...ary2);
+        console.log(ary1); //[1,2,3,2,3,4]
+
+        //将伪数组转化成真正的数组
+        let oDivs = document.getElementsByTagName('div');
+        console.log(oDivs); //此时输出的是div元素集合，是伪数组
+        oDivs = [...oDivs];
+        console.log(oDivs); //输出的是真正的数组
+
+        //构造函数方法：Array.from()
+        let arrayLike = {
+            '0': 'a',
+            '1': 'b',
+            '2': 'c',
+            length: 3
+        };
+        let arr2 = Array.from(arrayLike);
+        console.log(arr2); //['a', 'b', 'c']
+
+        let arrayLike2 = {
+            '0': '1',
+            '1': '2',
+            '2': '3',
+            length: 3
+        };
+        let arr3 = Array.from(arrayLike2, item => item * 2);
+        console.log(arr3); //[2, 4, 6]
+
+        //实例方法：find（）
+        let arr = [{
+            id: 1,
+            name: '张三'
+        }, {
+            id: 2,
+            name: '李四'
+        }];
+        let target = arr.find(item => item.id == 2);
+        console.log(target); //{id: 2, name: '李四'}
+
+        //实例方法：findIndex()
+        let position = arr.findIndex(item => item.name == '张三');
+        console.log(position); //0
+
+        //实例方法 includes（）
+        let flag = arr.includes(item => item.name == '许嵩');
+        console.log(flag); //false
+
+        //String的扩展方法 创建字符串
+        let name = 'zhangsan';
+        //模板字符串中可以解析变量
+        let sayHello = `hello ,my name is ${name}`;
+        console.log(sayHello); //hello ,my name is zhangsan
+        //模板字符串调用函数
+        const text = () => {
+            return '这是函数';
+        }
+        let html = `这是字符串模板 ${text()}`;
+        console.log(html); //这是字符串模板 这是函数
+
+        //实例方法 startsWith() 和 endsWith()
+        let str = 'Hello world!'
+        console.log(str.startsWith('Hello')); //true
+        console.log(str.endsWith('!')); //true
+
+        //实例方法 repeat（）
+        console.log('x'.repeat(3)); //xxx
+
+        //Set数据结构
+        const sr1 = new Set();
+        console.log(sr1.size); //0
+        const sr2 = new Set(['a', 'b']);
+        console.log(sr2.size); //2
+        const sr3 = new Set(['a', 'b', 'a', 'b']);
+        console.log(sr3.size); //2 自动把重复的值过滤
+        const sr4 = [...sr3];
+        console.log(sr4); // ['a', 'b']
+
+        //遍历
+        const sr5 = new Set(['a', 'b', 'c', 'd']);
+        sr5.forEach(value => {
+            console.log(value); //
+        })
+    </script>
+</body>
+
+</html>

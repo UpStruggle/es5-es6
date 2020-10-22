@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var num = 10
+        if (true) {
+            console.log(num); //未定义使用会报错
+            let num = 20;
+            let a = 10;
+        }
+        console.log(a); //会显示：a is not defined
+
+        //经典面试题
+        //此题关键点在于i是全局变量，函数执行时输出的都是全局作用域下的值
+        var arr = [];
+        for (var i = 0; i < 2; i++) {
+            arr[i] = function() {
+                console.log(i);
+            }
+        }
+        arr[0](); //输出2
+        arr[1](); //输出2
+
+        //i为块级作用域，每次循环都会产生一个块级作用域，每个块级作用域中的变量都是不同的
+        //函数执行时输出的是自己上一级（循环体产生的块级作用域）作用域下的值
+        var arr = [];
+        for (let i = 0; i < 2; i++) {
+            arr[i] = function() {
+                console.log(i);
+            }
+        }
+        arr[0](); //输出0
+        arr[1](); //输出1
+
+        //const
+        if (true) {
+            const b = 10;
+        }
+        console.log(b); //会显示：b is not defined
+    </script>
+</body>
+
+</html>

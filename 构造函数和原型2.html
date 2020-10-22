@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // //原型对象this指向问题
+        // function Star(uname, age) {
+        //     this.uname = uname;
+        //     this.age = age;
+        // }
+        // var that;
+        // Star.prototype.sing = function() {
+        //     console.log('我会唱歌');
+        //     that = this;
+        // }
+        // var ldh = new Star('刘德华', 18);
+        // //1.在构造函数中，里面的this指向的是对象实例 ldh
+        // ldh.sing(); //这样就调用了
+        // //2.在原型对象函数中，this指向的是实例对象（对象实例）ldh
+        // console.log(that == ldh);//输出为true
+
+        //扩展内置对象
+        //给数组增加自定义求偶数和的功能
+        var sum = 0;
+        Array.prototype.sum = function() {
+                for (var i = 0; i < this.length; i++) {
+                    sum += this[i];
+                }
+                return sum;
+            }
+            //不能通过 “等于” 方式来追加方法，因为这样回覆盖以前的方法 
+            //下面这种写法是错误的
+            // Array.prototype = {
+            //         sum: function() {
+            //             var sum = 0;
+            //             for (var i = 0; i < this.length; i++) {
+            //                 sum += this[i];
+            //             }
+            //             return sum;
+            //         }
+            //     }
+            //js是由上往下执行，必须先把原型对象的功能加进去才能使用
+        var arr = [1, 2, 3]; //调用
+        console.log(arr.sum());
+        console.log(Array.prototype); //此时构造函数内有了自定义的方法
+        //var arr1 = new Array(1,2,3);  这样调用也可以
+    </script>
+</body>
+
+</html>

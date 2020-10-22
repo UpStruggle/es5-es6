@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //高阶函数：函数可以作为参数传递
+        // function fn(a, b, callback) {
+        //     console.log(a + b);
+        //     callback && callback();
+        // }
+        // fn(1, 2, function() {
+        //     console.log("这个是最后调用的");
+        // });
+
+        //闭包:指有权访问另外一个函数作用域中变量的函数
+        //fun 这个函数作用域 访问了另一个函数 fn 里面的局部变量 num,
+        //被访问的变量所在的函数就是一个闭包函数 此处fn就是一个闭包函数
+        // function fn() {
+        //     var num = 10;
+
+        //     function fun() {
+        //         console.log(num);
+        //     }
+        //     fun();
+        // }
+        // fn();
+
+        // //fn 外面的作用域可以访问 fn 内部的变量
+        // function fn() {
+        //     var num = 10;
+
+        //     function fun() {
+        //         console.log(num);
+        //     }
+        //     return fun;
+        // }
+        // var f = fn(); //相当于 var f = function fun() { console.log(num);}
+
+        //递归
+        // var num = 1;
+
+        // function fn() {
+        //     console.log("输出");
+        //     if (num == 6) {
+        //         return; //递归函数里面必须加return
+        //     }
+        //     num++;
+        //     fn();
+        // }
+        // fn();
+
+        //利用递归求1-n的阶乘
+        // function fn(n) {
+        //     if (n == 1) {
+        //         return 1;
+        //     }
+        //     return n * fn(n - 1);
+        // };
+        // console.log(fn(3));
+
+        // //递归实现斐波那契数列
+        // function Fib(n) {
+        //     if (n == 1 || n == 2) {
+        //         return 1;
+        //     }
+        //     return Fib(n - 1) + Fib(n - 2);
+        // }
+        // console.log(Fib(3)); //2
+        // console.log(Fib(6)); //8
+
+        //利用递归遍历数据
+        // var data = [{
+        //         id: 1,
+        //         name: '家电',
+        //         goods: [{
+        //             id: 11,
+        //             gname: '冰箱'
+        //         }, {
+        //             id: 12,
+        //             gname: '洗衣机'
+        //         }]
+        //     }, {
+        //         id: 2,
+        //         name: '服饰'
+        //     }]
+        // //输入id号，就可以返回数据对象
+        // //1.利用foreach遍历每一个元素
+        // function getID(json, id) {
+        //     json.forEach(function(item) {
+        //         //console.log(item); //两个数组元素
+        //         if (item.id == id) {
+        //             console.log(item);
+        //             //2.得到里层的数据 可以利用递归函数
+        //             //里面应该有goods数组，并且数组长度不为零
+        //         }else if(item.goods && item.goods.length>0){
+        //             getID(item.goods)
+        //         }
+        //     })
+        // }
+        // console.log(getID(data, 1));
+        // console.log(getID(data, 11));
+
+        //深拷贝  利用函数递归
+        var obj = {
+            id: 1,
+            name: '家电',
+            msg: {
+                age: 18
+            }
+        }
+        var o = {};
+        //封装函数
+        function deepCopy(newobj, oldobj) {
+            for (var k in oldobj) {
+                //判断属性值属于哪种数据类型
+                //1.获取属性值 oldobj[k]
+                var item = oldobj[k];
+                //2.判断值是否是数组
+                //数组放在上面，因为数组也属于Object
+                if (item instanceof Array) {
+                    newobj[k] = [];
+                    deepCopy(newobj[k], item);
+                } else if (item instanceof Object) {
+                    //3.判断这个值是否是对象
+                    newobj[k] = {};
+                    deepCopy(newobj[k], item);
+                } else {
+                    //4.属于简单数据类型
+                    newobj[k] = item;
+                }
+            }
+        }
+        deepCopy(o, obj);
+        console.log(o); //o已经被拷贝
+    </script>
+</body>
+
+</html>

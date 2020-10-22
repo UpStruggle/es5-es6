@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 借用构造函数继承父类型属性
+        //1.父构造函数
+        function Father(uname, age) {
+            //this指向父构造函数的对象实例
+            this.uname = uname;
+            this.age = age;
+        }
+        Father.prototype.money = function() {
+                console.log(10000);
+            }
+            //2.子构造函数
+        function Son(uname, age, score) {
+            //this指向子构造函数的对象实例
+            Father.call(this, uname, age);
+            //首先调用了父构造函数，然后把父构造函数里面的this指向改为指向子构造函数
+            //还可添加子构造函数自己的属性
+            this.score = score;
+        }
+        //Son.prototype = Father.prototype;  这样直接赋值是错误的
+        //应该用下面这种方法
+        Son.prototype = new Father();
+        //如果利用对象的形式修改了原型对象，别忘了利用constructor指会原来的构造函数
+        Son.prototype.constructor = Son;
+        Son.prototype.exam = function() {
+            console.log("考试");
+        }
+        var son = new Son("刘德华", 18, 100);
+        console.log(son);
+    </script>
+</body>
+
+</html>
